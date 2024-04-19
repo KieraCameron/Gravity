@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB2D628E2BD25DE200C9A3D1 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = DB2D628D2BD25DE200C9A3D1 /* utils.c */; };
 		DBE6F6E32BCBA3CC0009ED84 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = DBE6F6E22BCBA3CC0009ED84 /* main.c */; };
+		DBE6F6EC2BCBA3DF0009ED84 /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBE6F6EA2BCBA3DF0009ED84 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DBE6F6EE2BCBA5870009ED84 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE6F6EA2BCBA3DF0009ED84 /* SDL2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -20,11 +23,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		DBE6F6ED2BCBA3DF0009ED84 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DBE6F6EC2BCBA3DF0009ED84 /* SDL2.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		DB2D628C2BD25DE200C9A3D1 /* utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
+		DB2D628D2BD25DE200C9A3D1 /* utils.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = utils.c; sourceTree = "<group>"; };
 		DBE6F6DF2BCBA3CC0009ED84 /* Gravity */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Gravity; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBE6F6E22BCBA3CC0009ED84 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		DBE6F6EA2BCBA3DF0009ED84 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBE6F6EE2BCBA5870009ED84 /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +61,7 @@
 			children = (
 				DBE6F6E12BCBA3CC0009ED84 /* Gravity */,
 				DBE6F6E02BCBA3CC0009ED84 /* Products */,
+				DBE6F6E92BCBA3DF0009ED84 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,8 +77,18 @@
 			isa = PBXGroup;
 			children = (
 				DBE6F6E22BCBA3CC0009ED84 /* main.c */,
+				DB2D628C2BD25DE200C9A3D1 /* utils.h */,
+				DB2D628D2BD25DE200C9A3D1 /* utils.c */,
 			);
 			path = Gravity;
+			sourceTree = "<group>";
+		};
+		DBE6F6E92BCBA3DF0009ED84 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DBE6F6EA2BCBA3DF0009ED84 /* SDL2.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -72,6 +101,7 @@
 				DBE6F6DB2BCBA3CC0009ED84 /* Sources */,
 				DBE6F6DC2BCBA3CC0009ED84 /* Frameworks */,
 				DBE6F6DD2BCBA3CC0009ED84 /* CopyFiles */,
+				DBE6F6ED2BCBA3DF0009ED84 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -120,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBE6F6E32BCBA3CC0009ED84 /* main.c in Sources */,
+				DB2D628E2BD25DE200C9A3D1 /* utils.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +276,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+					"/Library/Frameworks/**",
+				);
+				HEADER_SEARCH_PATHS = /Library/Frameworks/SDL2.framework/Versions/A/Headers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -253,6 +290,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+					"/Library/Frameworks/**",
+				);
+				HEADER_SEARCH_PATHS = /Library/Frameworks/SDL2.framework/Versions/A/Headers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
