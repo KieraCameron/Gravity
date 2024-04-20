@@ -21,8 +21,8 @@
 #include "utils.h"
 #include <time.h>
 
-const int width = 800;
-const int height = 600;
+const int WIDTH = 800;
+const int HEIGHT = 600;
 void pause_window(void)
 {
     SDL_Event e;
@@ -36,56 +36,53 @@ void pause_window(void)
     }
 }
 
+void move_rect(SDL_Rect *rect, int *dirx, int *diry, int speed)
+{
+    //SDL_Delay(1000/speed);
+    rect->x += 1 * (*dirx);
+    rect->y += 1 * (*diry);
+    if (rect->x == 0 || rect->x == WIDTH - rect->w) {
+        (*dirx) *= -1;
+    }
+    if (rect->y == 0 || rect->y == HEIGHT - rect->h) {
+        (*diry) *= -1;
+    }
+}
 
 int main(int argc, char* argv[])
 {
     
     SDL_Init(SDL_INIT_EVERYTHING);
     
-    SDL_Window *window = SDL_CreateWindow("Gravity", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_OPENGL);
+    SDL_Window *window = SDL_CreateWindow("Gravity", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, SDL_WINDOW_OPENGL);
     
     // pause_window();
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     bool running = true;
     SDL_Event e;
+        
     
-
-//    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-//    SDL_Rect rect = {50, 50, 200, 200};
-//    SDL_RenderFillRect(renderer, &rect);
-//    
-//    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-//    SDL_Rect rect2 = {300, 50, 200, 200};
-//    SDL_RenderDrawRect(renderer, &rect2);
-    
-    
-    int dx = 0;
-    int dy = 0;
-    const int vx = -1;
-    const int vy = -1;
-    time_t start = time(NULL);
-    double dur;
+    int dirx = -1;
+    int diry = -1;
+    int sx = 1000;
+    int sy = 800;
+    int speed = sqrt(sx*sx + sy*sy);
+    SDL_Rect rect = {WIDTH - 50, HEIGHT - 50, 50, 50};
     while (running) {
         while (SDL_PollEvent(&e)) {
             if (e.type == SDL_QUIT) {
                 running = false;
             }
         }
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         SDL_RenderClear(renderer);
         
-        SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-        SDL_Rect rect = {width - 50 + dx, height - 50 + dy, 50, 50};
-        SDL_RenderDrawRect(renderer, &rect);
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        move_rect(&rect, &dirx, &diry, speed);
+        SDL_RenderFillRect(renderer, &rect);
         
 
         SDL_RenderPresent(renderer);
-        dur = difftime(time(NULL), start);
-        printf("%f\n", dur);
-        dx = vx * dur;
-        dy = vy * dur;
-
-
     }
     
     SDL_DestroyRenderer(renderer);
